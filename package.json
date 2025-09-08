@@ -1,0 +1,13 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "this is my backend learning",
+  "main": "script.js",
+  "scripts": {
+    "dev": "node script.js"
+    
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
