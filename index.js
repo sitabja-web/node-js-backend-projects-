@@ -1,25 +1,34 @@
-import express from "express";
-import dotenv from "dotenv";
 
-dotenv.config();
+
+import express from "express";
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = 4000;
 
-app.get("/", (req, res) => {
-  res.send("hello"); // res.send is more common for text responses
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+const password = "sitabbja123";
+
+// Middleware to check password for POST requests
+app.use((req, res, next) => {
+  // Only check for POST requests
+  if (req.method === "POST") {
+    if (req.body.pass !== password) {
+      return res.status(401).send({ success: false, message: "Password does not match" });
+    }
+  }
+  next();  // 
+});
+
+// POST request handler at "/"
+app.post("/", (req, res) => {
+  console.log("Received data:", req.body);
+  res.send({ success: true, received: req.body });
 });
 
 app.listen(port, () => {
-  console.log(`Server started at http://localhost:${port}`);
+  console.log(`Server started on port ${port}...`);
 });
 
 
-// this how we create a server in node js 
-
-
-       
-
-
-
-// env files is there to stotre all the importnat parts of the document 
